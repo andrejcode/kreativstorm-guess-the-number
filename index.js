@@ -1,18 +1,29 @@
-// TODO: Implement the generateRandomNumber function
+const MAX_ATTEMPTS = 10;
+
+/**
+ * Generates a random number between 1 and 100 (inclusive).
+ *
+ * @returns {number} A random number between 1 and 100.
+ */
 function generateRandomNumber() {
   return Math.floor(Math.random() * 100) + 1;
 }
 
-// TODO: Implement the getPlayerGuess function
+/**
+ * Prompts the user to enter a guess between 1 and 100.
+ * Repeats the prompt until a valid number is entered.
+ *
+ * @returns {number} The player's guess, a number between 1 and 100.
+ */
 function getPlayerGuess() {
   let guess;
   while (true) {
     guess = parseInt(prompt('Enter your guess (between 1 and 100):'), 10);
 
-    // Check if the input is a valid number within the range
     if (!isNaN(guess) && guess >= 1 && guess <= 100) {
       return guess;
     }
+
     console.log('Invalid input. Please enter a number between 1 and 100.');
   }
 }
@@ -75,22 +86,27 @@ function generateCongratulatoryMessage(attemptCounter) {
  */
 function game() {
   const correctNumber = generateRandomNumber();
-  let playerGuess = getPlayerGuess();
   let attemptCounter = 1;
 
-  while (attemptCounter <= 10) {
-    const checkGuessMessage = checkGuess(playerGuess, correctNumber);
+  while (attemptCounter <= MAX_ATTEMPTS) {
+    const playerGuess = getPlayerGuess();
 
-    if (checkGuessMessage === 'correct') {
-      const congratulatoryMessage =
-        generateCongratulatoryMessage(attemptCounter);
-      console.log(congratulatoryMessage);
+    try {
+      const checkGuessMessage = checkGuess(playerGuess, correctNumber);
+
+      if (checkGuessMessage === 'correct') {
+        const congratulatoryMessage =
+          generateCongratulatoryMessage(attemptCounter);
+        console.log(congratulatoryMessage);
+        return;
+      }
+
+      console.log(`Your guess is ${checkGuessMessage}. Please try again!`);
+    } catch (error) {
+      console.error(error);
       return;
     }
 
-    console.log(`Your guess is ${checkGuessMessage}. Please try again!`);
-
-    playerGuess = getPlayerGuess();
     attemptCounter += 1;
   }
 
