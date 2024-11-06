@@ -115,13 +115,18 @@ function game() {
         const congratulatoryMessage =
           generateCongratulatoryMessage(attemptCounter);
         alert(congratulatoryMessage);
-        break;
+        return;
       }
 
-      alert(`Your guess is ${checkGuessMessage}. Please try again!`);
+      if (attemptCounter < 10) {
+        alert(
+          `Your guess is ${checkGuessMessage}. Please try again!.
+           You have  ${MAX_ATTEMPTS - attemptCounter} attempts left.`
+        );
+      }
     } catch (error) {
       console.error(error);
-      break;
+      return;
     }
 
     attemptCounter += 1;
