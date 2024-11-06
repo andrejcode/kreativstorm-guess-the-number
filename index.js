@@ -1,11 +1,20 @@
 // TODO: Implement the generateRandomNumber function
 function generateRandomNumber() {
-  return 1;
+  return Math.floor(Math.random() * 100) + 1;
 }
 
 // TODO: Implement the getPlayerGuess function
 function getPlayerGuess() {
-  return 1;
+  let guess;
+  while (true) {
+    guess = parseInt(prompt('Enter your guess (between 1 and 100):'), 10);
+
+    // Check if the input is a valid number within the range
+    if (!isNaN(guess) && guess >= 1 && guess <= 100) {
+      return guess;
+    }
+    console.log('Invalid input. Please enter a number between 1 and 100.');
+  }
 }
 
 /**
