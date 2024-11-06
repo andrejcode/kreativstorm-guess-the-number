@@ -24,7 +24,7 @@ function getPlayerGuess() {
       return guess;
     }
 
-    console.log('Invalid input. Please enter a number between 1 and 100.');
+    alert('Invalid input. Please enter a number between 1 and 100.');
   }
 }
 
@@ -97,11 +97,11 @@ function game() {
       if (checkGuessMessage === 'correct') {
         const congratulatoryMessage =
           generateCongratulatoryMessage(attemptCounter);
-        console.log(congratulatoryMessage);
+        alert(congratulatoryMessage);
         return;
       }
 
-      console.log(`Your guess is ${checkGuessMessage}. Please try again!`);
+      alert(`Your guess is ${checkGuessMessage}. Please try again!`);
     } catch (error) {
       console.error(error);
       return;
@@ -110,7 +110,7 @@ function game() {
     attemptCounter += 1;
   }
 
-  console.log(
+  alert(
     `Sorry! You did not guess the correct number. The correct number was ${correctNumber}.`
   );
 }
