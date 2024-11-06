@@ -13,15 +13,27 @@ function generateRandomNumber() {
  * Prompts the user to enter a guess between 1 and 100.
  * Repeats the prompt until a valid number is entered.
  *
- * @returns {number} The player's guess, a number between 1 and 100.
+ * @returns {number|null} The player's guess if it's a valid number between 1 and 100.
+ *                        Returns `null` if the user cancels the prompt.
  */
 function getPlayerGuess() {
-  let guess;
+  let playerGuess;
   while (true) {
-    guess = parseInt(prompt('Enter your guess (between 1 and 100):'), 10);
+    playerGuess = prompt('Enter your guess (between 1 and 100):');
 
-    if (!isNaN(guess) && guess >= 1 && guess <= 100) {
-      return guess;
+    if (playerGuess === null) {
+      return null;
+    }
+
+    playerGuess = Number(playerGuess);
+
+    if (
+      !isNaN(playerGuess) &&
+      Number.isInteger(playerGuess) &&
+      playerGuess >= 1 &&
+      playerGuess <= 100
+    ) {
+      return playerGuess;
     }
 
     alert('Invalid input. Please enter a number between 1 and 100.');
@@ -91,6 +103,11 @@ function game() {
   while (attemptCounter <= MAX_ATTEMPTS) {
     const playerGuess = getPlayerGuess();
 
+    if (playerGuess === null) {
+      alert('Game cancelled.');
+      break;
+    }
+
     try {
       const checkGuessMessage = checkGuess(playerGuess, correctNumber);
 
@@ -98,13 +115,13 @@ function game() {
         const congratulatoryMessage =
           generateCongratulatoryMessage(attemptCounter);
         alert(congratulatoryMessage);
-        return;
+        break;
       }
 
       alert(`Your guess is ${checkGuessMessage}. Please try again!`);
     } catch (error) {
       console.error(error);
-      return;
+      break;
     }
 
     attemptCounter += 1;
