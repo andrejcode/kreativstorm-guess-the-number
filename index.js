@@ -118,8 +118,9 @@ function game() {
 
       if (attemptCounter < 10) {
         alert(
-          `Your guess is ${checkGuessMessage}. Please try again!.
-           You have  ${MAX_ATTEMPTS - attemptCounter} attempts left.`
+          `Your guess is ${checkGuessMessage}. Please try again!.\nYou have ${
+            MAX_ATTEMPTS - attemptCounter
+          } ${attemptCounter === 9 ? 'attempt' : 'attempts'} left.` // Pluralize "attempt" if there is more than one attempt left.
         );
       }
     } catch (error) {
