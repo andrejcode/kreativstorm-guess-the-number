@@ -13,19 +13,17 @@ function generateRandomNumber() {
  * Prompts the user to enter a guess between 1 and 100.
  * Repeats the prompt until a valid number is entered.
  *
- * @returns {number|null} The player's guess if it's a valid number between 1 and 100.
- *                        Returns `null` if the user cancels the prompt.
+ * @returns {number|null} The player's guess if it's a valid number between 1 and 100, or null if the prompt is cancelled.
  */
 function getPlayerGuess() {
-  let playerGuess;
   while (true) {
-    playerGuess = prompt('Enter your guess (between 1 and 100):');
+    const input = prompt('Enter your guess (between 1 and 100):');
 
-    if (playerGuess === null) {
+    if (input === null) {
       return null;
     }
 
-    playerGuess = Number(playerGuess);
+    const playerGuess = Number(input);
 
     if (
       !isNaN(playerGuess) &&
