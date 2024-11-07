@@ -137,4 +137,6 @@ function game() {
   );
 }
 
-game();
+window.addEventListener('focus', () => {
+  game();
+});
