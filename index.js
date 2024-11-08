@@ -65,11 +65,16 @@ function game() {
   const correctNumber = generateRandomNumber();
   let attemptCounter = 1;
 
+  alert('Welcome to Guess the Number!');
+  alert(
+    `I've picked a random number between 1 and 100.\nYou have ${MAX_ATTEMPTS} attempts to guess it. Good luck!`
+  );
+
   while (attemptCounter <= MAX_ATTEMPTS) {
     const playerGuess = getPlayerGuess();
 
     if (playerGuess === null) {
-      alert('Game cancelled.');
+      alert("We're sorry you're leaving.");
       break;
     }
 
@@ -80,14 +85,18 @@ function game() {
         const congratulatoryMessage =
           generateCongratulatoryMessage(attemptCounter);
         alert(congratulatoryMessage);
-        return;
+        break;
       }
 
-      if (attemptCounter < 10) {
+      if (attemptCounter < MAX_ATTEMPTS) {
         alert(
           `Your guess is ${checkGuessMessage}. Please try again!.\nYou have ${
             MAX_ATTEMPTS - attemptCounter
           } ${attemptCounter === 9 ? 'attempt' : 'attempts'} left.`
+        );
+      } else {
+        alert(
+          `Sorry! You did not guess the correct number. The correct number was ${correctNumber}.`
         );
       }
     } catch (error) {
@@ -98,9 +107,7 @@ function game() {
     attemptCounter += 1;
   }
 
-  alert(
-    `Sorry! You did not guess the correct number. The correct number was ${correctNumber}.`
-  );
+  alert('Thanks for playing Guess the Number!');
 }
 
 game();
