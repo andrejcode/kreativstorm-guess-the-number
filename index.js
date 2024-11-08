@@ -9,7 +9,13 @@ function getPlayerGuess() {
     const input = prompt('Enter your guess (between 1 and 100):');
 
     if (input === null) {
-      return null;
+      const confirmCancel = confirm('Are you sure you want to leave the game?');
+
+      if (confirmCancel) {
+        return null;
+      }
+
+      continue;
     }
 
     const playerGuess = Number(input);
